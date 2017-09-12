@@ -2,8 +2,8 @@ var bio = {
     "name": "Annika Kaiser",
     "role": "Frontend Developer",
     "contacts": {
-        "mobile": "0152 5597 0220",
-        "email": "annika.kaiser@gmail.com",
+        "mobile": "redacted",
+        "email": "redacted",
         "github": "annjkai",
         "location": "Leipzig"
     },
