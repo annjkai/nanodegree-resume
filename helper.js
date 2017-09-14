@@ -90,7 +90,8 @@ $(document).click(function (loc) {
     var x = loc.pageX;
     var y = loc.pageY;
 
-    logClicks(x, y);});
+    logClicks(x, y);
+});
 
 
 /*
@@ -147,6 +148,12 @@ function initializeMap() {
             locations.push(job.location);
         });
 
+        //iterates through other locations and appends to the
+        //locations array
+        otherLocations.places.forEach(function (place) {
+            locations.push(place);
+        });
+
         return locations;
     }
 
@@ -179,8 +186,17 @@ function initializeMap() {
 
         // hmmmm, I wonder what this is about...
         google.maps.event.addListener(marker, 'click', function () {
-            // your code goes here!
+
+
+            infoWindow.open(map, marker);
+
+            //lets the map zoom in closer when a marker is clicked
+            map.SetZoom(5);
+            map.setCenter(marker.getPosition());
+
         });
+
+
 
         // this is where the pin actually gets added to the map.
         // bounds.extend() takes in a map location object
@@ -236,16 +252,12 @@ function initializeMap() {
 
 }
 
-/*
-Uncomment the code below when you're ready to implement a Google Map!
-*/
-
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function (e) {
 //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+    map.fitBounds(mapBounds);
+});

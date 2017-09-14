@@ -2,14 +2,14 @@ var bio = {
     "name": "Annika Kaiser",
     "role": "Frontend Developer",
     "contacts": {
-        "mobile": "redacted",
-        "email": "redacted",
+        "mobile": "0152 5597 0220",
+        "email": "annika.kaiser@gmail.com",
         "github": "annjkai",
         "location": "Leipzig"
     },
     "welcomeMessage": "Welcome to this here page",
     "skills": ["JavaScript, CSS3, HTML5", "Java, XML", "Project management", "Translation"],
-    "biopic": "images/fry.jpg"
+    "biopic": ""
 };
 
 var work = {
@@ -90,6 +90,15 @@ var education = {
     ]
 };
 
+//I wanted to add some additional map markers for locations I couldn't/didn't want to
+// contextualize in the resume. I added them to the googleMaps method where appropriate
+var otherLocations = {
+    "places": [
+        "Pretoria, South Africa",
+        "Edmonton, AB"
+    ]
+};
+
 var formattedName = HTMLheaderName.replace("%data%", bio.name);
 var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
@@ -151,50 +160,6 @@ function displayWork() {
 
 displayWork();
 
-/* This is the old Work function using a for in loop
-function displayWork() {
-
-    if (work.jobs.length > 0) {
-
-        $("#workExperience").append(HTMLworkStart);
-
-        for (job in work.jobs) {
-
-            var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-            var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-
-            var formattedEmployerTitle = formattedEmployer + formattedTitle;
-
-            $(".work-entry:last").append(formattedEmployerTitle);
-
-            var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-            var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-
-            var formattedJobInfo = formattedDates + formattedDescription;
-            $(".work-entry:last").append(formattedJobInfo);
-        }
-    }
-}
-
-displayWork(); */
-
-
-/*these functions are not necessary but they helped me test whether the loop was working
-function getProjectTitle(args) {
-    var projectIndex = args;
-    console.log(projects.projects[projectIndex].title);
-}
-
-function getProjectDescription(args) {
-    var projectIndex = args;
-    console.log(projects.projects[projectIndex].description);
-}
-
-function getProjectDates(args) {
-    var projectIndex = args;
-    console.log(projects.projects[projectIndex].dates);
-}*/
-
 /*the displayProject function which allows the for loop to execute*/
 function displayProject() {
     //append HTMLprojectStart before running the for loop
@@ -222,32 +187,6 @@ function displayProject() {
 //throw each project on the page
 displayProject();
 
-/*old education function
-function displayEducation() {
-
-    if (education.schools.length > 0) {
-
-        $("#education").append(HTMLschoolStart);
-
-        for (education in education.schools) {
-
-            var formattedSchoolName = HTMLschoolName.replace("%data%", education.school[education].name);
-            var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.school[education].location);
-            var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.school[education].degree);
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.school[education].major);
-            var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.school[education].dates);
-
-            var formattedEducationInfo = formattedSchoolName + formattedSchoolLocation;
-
-            $(".education-entry:last").append(formattedEducationInfo);
-
-        }
-    }
-}
-
-displayEducation();
-*/
-
 function displayEducation() {
     $("#education").append(HTMLschoolStart);
 
@@ -268,6 +207,7 @@ function displayEducation() {
     }
 
     for (i = 0; i < education.onlineClasses.length; i++) {
+
         var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineClasses[i].title);
         var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineClasses[i].school);
 
