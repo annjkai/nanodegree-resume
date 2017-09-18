@@ -2,8 +2,8 @@ var bio = {
     "name": "Annika Kaiser",
     "role": "Frontend Developer",
     "contacts": {
-        "mobile": "+49 0152 5597 0220",
-        "email": "annika.kaiser@gmail.com",
+        "mobile": "redacted",
+        "email": "redacted",
         "github": "annjkai",
         "linkedIn": "Annika Kaiser",
         "location": "Leipzig"
@@ -41,14 +41,14 @@ var work = {
             " and JavaScript."
         },
         {
-            "employer": "ICC Sprachinstitut",
-            "title": "Project Manager IdA III",
+            "employer": "redacted",
+            "title": "redacted",
             "location": "Leipzig",
             "dates": "October 2016 - June 2017",
             "description": "Project manager and language teacher for participants doing a 9-week internship abroad."
         },
         {
-            "employer": "Wohanka",
+            "employer": "redacted",
             "title": "Junior Proofreader",
             "location": "Leipzig",
             "dates": "July 2015 - September 2016",
