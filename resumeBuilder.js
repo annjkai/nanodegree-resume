@@ -2,14 +2,32 @@ var bio = {
     "name": "Annika Kaiser",
     "role": "Frontend Developer",
     "contacts": {
-        "mobile": "0152 5597 0220",
+        "mobile": "+49 0152 5597 0220",
         "email": "annika.kaiser@gmail.com",
         "github": "annjkai",
+        "linkedIn": "Annika Kaiser",
         "location": "Leipzig"
     },
-    "welcomeMessage": "Welcome to this here page",
-    "skills": ["JavaScript, CSS3, HTML5", "Java, XML", "Project management", "Translation"],
-    "biopic": ""
+    "welcomeMessage": "I'm a novice frontend developer, living and working in Leipzig, and am currently seeking job opportunities in the Frontend Development field.\nPlease get in touch!",
+    "skills": ["JavaScript", "HTML5", "CSS3", "Java"],
+    "biopic": "images/kaiser_portfolio.jpg"
+};
+
+var skills = {
+    "skill": [
+        {
+            "name": "JavaScript//HTML5//CSS3",
+            "description": "I have a good understanding of the skills required for web development."
+        },
+        {
+            "name": "Java//XML",
+            "description": "I have a good basic knowledge of Java in the context of Android app development."
+        },
+        {
+            "name": "Translation & Proofreading",
+            "description": "I have many years of experience in processing texts, specifically English <-> German."
+        }
+    ]
 };
 
 var work = {
@@ -70,7 +88,7 @@ var education = {
             "name": "University of Calgary",
             "location": "Calgary, AB",
             "degree": "BA (Hons) Linguistics",
-            "major": ["Linguistics"],
+            "thesis": ["Issues in Syllable Cut Theory: Standard German and Middle Bavarian"],
             "dates": "2005 - 2010"
         }
     ],
@@ -91,11 +109,27 @@ var education = {
 };
 
 //I wanted to add some additional map markers for locations I couldn't/didn't want to
-// contextualize in the resume. I added them to the googleMaps method where appropriate
-var otherLocations = {
+// contextualize in the resume. I added them to the googleMaps method where appropriate.
+//I then realized I wanted to add some data to my info windows that would be far too fiddly
+//to incorporate elsewhere, so I moved all maps functionality to its own JSON object (I kept
+//the code which pulls locations out of other objects because I may want to return to that way
+//of doing it in the future). The goal is to eventually implement the dates that go with each
+// location. Because this was somewhat of an afterthought, the naming conventions
+//are a bit dodgy - I would come back and fix this is the future.
+var myLocations = {
     "places": [
-        "Pretoria, South Africa",
-        "Edmonton, AB"
+        {
+            "myPlace": "Pretoria, South Africa",
+            "myDates": "1986 - 2003"
+        },
+        {
+            "myPlace": "Calgary, AB",
+            "myDates": "2003 - 2012"
+        },
+        {
+            "myPlace": "Leipzig, Germany",
+            "myDates": "2012 - present"
+        }
     ]
 };
 
@@ -104,14 +138,37 @@ var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
 var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
 var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+var formattedLinkedIn = HTMLlinkedIn.replace("%data%", bio.contacts.linkedIn);
 var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-var formattedBiopic = HTMLbioPic.replace("%data%", bio.contacts.biopic);
+var formattedBiopic = HTMLbioPic.replace("%data%", bio.biopic);
+var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+
+console.log(formattedWelcomeMsg);
 
 
-$("#header").append(formattedName).append(formattedRole).append(formattedMobile).append(formattedEmail)
-    .append(formattedGithub).append(formattedLocation).append(formattedBiopic);
+$("#header").append(formattedName).append(formattedRole).append(formattedWelcomeMsg).append(formattedBiopic);
 
-if (bio.skills.length > 0) {
+//Even though this content appears at the bottom of the page, I've left it here for now
+//because it seems logical to me to keep the contact section together
+$("#footerContacts").append(formattedMobile).append(formattedEmail).append(formattedLinkedIn)
+    .append(formattedGithub);
+
+function displaySkills() {
+    $("#skills").append(HTMLskillsStart);
+
+    for (i = 0; i < skills.skill.length; i++) {
+        var formattedSkillName = HTMLskillName.replace("%data%", skills.skill[i].name);
+        var formattedSkillDescription = HTMLskillDescription.replace("%data%", skills.skill[i].description);
+
+        var formattedSkill = formattedSkillName + formattedSkillDescription;
+
+        $(".skills-entry:last").append(formattedSkill);
+    }
+}
+
+displaySkills();
+
+/*if (bio.skills.length > 0) {
 
     $("#header").append(HTMLskillsStart);
 
@@ -123,7 +180,7 @@ if (bio.skills.length > 0) {
     $("#skills").append(formattedSkill);
     formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
     $("#skills").append(formattedSkill);
-}
+}*/
 
 
 /*Work function using a for loop*/
@@ -200,13 +257,16 @@ function displayEducation() {
 
         var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
         var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
-        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+        var formattedSchoolThesis = HTMLschoolThesis.replace("%data%", education.schools[i].thesis);
 
         $(".education-entry:last").append(formattedSchoolDates).append(formattedSchoolLocation)
-            .append(formattedSchoolMajor);
+            .append(formattedSchoolThesis);
     }
 
+    $("#education-entry:last").append(HTMLonlineClasses);
+
     for (i = 0; i < education.onlineClasses.length; i++) {
+
 
         var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineClasses[i].title);
         var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineClasses[i].school);

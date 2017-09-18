@@ -13,21 +13,35 @@ These are HTML strings. As part of the course, you'll be using JavaScript functi
 replace the %data% placeholder text you see in them.
 */
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr>';
+var HTMLheaderRole = '<h6>%data%</h6><hr>';
+/*
+var HTMLcontactGeneric = '<li class="flex-item" style="list-style: none"><span class="black-text">%contact%</span><span class="white-text">%data%</span></li>';
+var HTMLmobile = '<li class="flex-item" style="list-style: none"><span class="black-text">mobile</span><span class="white-text">%data%</span></li>';
+var HTMLemail = '<li class="flex-item" style="list-style: none"><span class="black-text">email</span><span class="white-text">%data%</span></li>';
+var HTMLtwitter = '<li class="flex-item" style="list-style: none"><span class="black-text">twitter</span><span class="white-text">%data%</span></li>';
+var HTMLgithub = '<li class="flex-item" style="list-style: none"><span class="black-text">github</span><span class="white-text">%data%</span></li>';
+var HTMLblog = '<li class="flex-item" style="list-style: none"><span class="black-text">blog</span><span class="white-text">%data%</span></li>';
+var HTMLlocation = '<li class="flex-item" style="list-style: none"><span class="black-text">location</span><span class="white-text">%data%</span></li>';
+*/
 
-var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
+var HTMLcontactGeneric = '<div id="contact-info""><li class="flex-item header-contact-list" style="list-style: none"><span class="black-text">%contact%</span><span class="white-text">%data%</span>';
+var HTMLmobile = '<span class="black-text">mobile</span><span class="black-text-bold">%data%</span>';
+var HTMLemail = '<span class="black-text">email</span><span class="black-text-bold">%data%</span>';
+var HTMLlinkedIn = '<span class="black-text">linkedIn</span><span class="black-text-bold">%data%</span>';
+var HTMLgithub = '<span class="black-text">github</span><span class="black-text-bold">%data%</span>';
+var HTMLblog = '<span class="black-text">blog</span><span class="black-text-bold">%data%</span>';
+var HTMLlocation = '<span class="black-text">location</span><span class="black-text-bold">%data%</span></li></div><br><br>';
 
 var HTMLbioPic = '<img src="%data%" class="biopic">';
-var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance:</h3><ul id="skills" class="flex-column"></ul>';
-var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+var HTMLwelcomeMsg = '<h6 class="welcome-message">%data%</h6>';
+
+//var HTMLskillsStart = '<h3 id="skills-h3">Skills:</h3><ul id="skills" class="flex-column"></ul>';
+
+var HTMLskillsStart = '<div class="skills-entry"></div>';
+var HTMLskillName = '<a class="skill-text">%data%: ';
+var HTMLskillDescription = '%data%</a>';
+//var HTMLskills = '<li class="flex-item" style="list-style: none"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
 var HTMLworkEmployer = '<a href="#">%data%';
@@ -42,13 +56,18 @@ var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
 var HTMLprojectImage = '<img src="%data%">';
 
+//I changed "major" to "thesis" because my major is already abundantly clear from my degree
+//and I didn't like how it looked. Since I wrote a Bachelor thesis as part of my honors degree
+//I decided to include that
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolThesis = '<em><br>Thesis: %data%</em>';
 
+//I wanted to change the name "classes" to "courses" but wanted to get a bit fancy,
+//so I used .replace in resumeBuilder.js
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
@@ -130,28 +149,28 @@ function initializeMap() {
         var locations = [];
 
         // adds the single location property from bio to the locations array
-        locations.push(bio.contacts.location);
+        //locations.push(bio.contacts.location);
 
         // iterates through school locations and appends each location to
         // the locations array. Note that forEach is used for array iteration
         // as described in the Udacity FEND Style Guide:
         // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
-        education.schools.forEach(function (school) {
+        /*education.schools.forEach(function (school) {
             locations.push(school.location);
-        });
+        });*/
 
         // iterates through work locations and appends each location to
         // the locations array. Note that forEach is used for array iteration
         // as described in the Udacity FEND Style Guide:
         // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
-        work.jobs.forEach(function (job) {
+        /*work.jobs.forEach(function (job) {
             locations.push(job.location);
-        });
+        }); */
 
-        //iterates through other locations and appends to the
+        //iterates through locations and appends to the
         //locations array
-        otherLocations.places.forEach(function (place) {
-            locations.push(place);
+        myLocations.places.forEach(function (place) {
+            locations.push(place.myPlace);
         });
 
         return locations;
@@ -176,6 +195,9 @@ function initializeMap() {
             position: placeData.geometry.location,
             title: name
         });
+
+        //check
+        var contentString = placeData.formatted_address + myLocations.places.myDates;
 
         // infoWindows are the little helper windows that open when you click
         // or hover over a pin on a map. They usually contain more information
